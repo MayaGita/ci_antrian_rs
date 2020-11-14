@@ -1,0 +1,40 @@
+<?php
+//defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Main extends CI_Controller {
+
+	function __construct(){
+		parent::__construct();
+		$this->load->helper('url');
+		$this->load->helper('form');
+		//load model
+		$this->load->model('Model_pasien');
+
+	}
+
+	    public function index(){
+	    	//$data['pasien']=$this->Model_pasien->select_pasien()->result();
+	    	$this->load->view('Main/index');
+	    }
+
+	    public function tambah_pasien(){
+	    	$this->load->view('Main/form');
+	    }
+	    public function proses_tambah(){
+	    	$data['nama_pasien']=$_POST['nama_pasien'];
+	    	$data['no_identitas']=$_POST['no_identitas'];
+	    	$data['jk_pasien']=$_POST['jk_pasien'];
+	    	$data['tgl_lahir']=$_POST['tgl_lahir'];
+	    	$data['no_telp']=$_POST['no_telp'];
+	    	$data['alamat']=$_POST['alamat'];
+	    	$data['nama_wali']=$_POST['nama_wali'];
+	    	$data['no_telp_wali']=$_POST['no_telp_wali'];
+	    	$data['tgl_kunjung']=$_POST['tgl_kunjung'];
+	    	$data['kode_poli']=$_POST['kode_poli'];
+
+	    	$this->Model_pasien->tambah_pasien($data);
+	    	redirect('Main/index');
+	    }
+	 
+}
+?>
